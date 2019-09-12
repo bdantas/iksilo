@@ -22,7 +22,7 @@ While script is running, you can type into most applications using *x method* (e
 - GNU/Linukso kun coreutils: Neniu alia ŝanĝo estas bezonata.
 - GNU/Linukso kun busybox: Forigu *stdbuf -oL*
 - OpenBSD: Ŝanĝu *stdbuf -oL* al *gstdbuf -oL*
-
+---
 - All OSes: Run `$ xinput list` to get your keyboard id, put it at the appropriate spot near top of script.
 - GNU/Linux with coreutils: No further adjustments needed.
 - GNU/Linux with busybox: Delete *stdbuf -oL*

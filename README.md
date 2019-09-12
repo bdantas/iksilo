@@ -11,11 +11,11 @@ Put the script in your PATH, make it executable. `$ iksilo start` to start using
 While script is running, you can type into most applications using *x method* (e.g., *cx* becomes *ĉ*).
 
 # Postuloj/requirements:
-- GNU/Linux: You must be running **X** and must install **xdotool**. *dzen2* is optional.
-- OpenBSD: You must be running **X** and must install **xdotool** and **coreutils**. *dzen2* is optional.
----
 - GNU/Linux: Vi bezonas **X** kaj **xdotool**. *dzen2* estas nedeviga.
 - OpenBSD: Vi bezonas **X**, **xdotool** kaj **coreutils**. *dzen2* estas nedeviga.
+---
+- GNU/Linux: You must be running **X** and must install **xdotool**. *dzen2* is optional.
+- OpenBSD: You must be running **X** and must install **xdotool** and **coreutils**. *dzen2* is optional.
 
 # Kiel ĝustigi la programeton por via operaciumo/adjusting the script for your OS:
 - Ĉiuj operaciumoj: Uzu `$ xinput list` por trovi la id-numeron de via klavaro, metu la numeron ĉe la supro de la programo.
@@ -27,6 +27,3 @@ While script is running, you can type into most applications using *x method* (e
 - GNU/Linux with coreutils: No further adjustments needed.
 - GNU/Linux with busybox: Delete *stdbuf -oL*
 - OpenBSD: Change *stdbuf -oL* to *gstdbuf -oL*
-
-
-

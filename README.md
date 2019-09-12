@@ -14,6 +14,7 @@ Dum kiam rulas la programeto, vi povas tajpi en plej multajn programojn uzante l
 - GNU/Linux: You must be running **X** and must install **xdotool**. *dzen2* is optional.
 - OpenBSD: You must be running **X** and must install **xdotool** and **coreutils**. *dzen2* is optional.
 
+
 - GNU/Linux: Vi bezonas **X** kaj **xdotool**. *dzen2* estas nedeviga.
 - OpenBSD: Vi bezonas **X**, **xdotool** kaj **coreutils**. *dzen2* estas nedeviga.
 
@@ -22,6 +23,7 @@ Dum kiam rulas la programeto, vi povas tajpi en plej multajn programojn uzante l
 - GNU/Linux with coreutils: No further adjustments needed.
 - GNU/Linux with busybox: Delete *stdbuf -oL*
 - OpenBSD: Change *stdbuf -oL* to *gstdbuf -oL*
+
 
 - Ĉiuj operaciumoj: Uzu `$ xinput list` por trovi la id-numeron de via klavaro, metu la numeron ĉe la supro de la programo.
 - GNU/Linukso kun coreutils: Neniu alia ŝanĝo estas bezonata.

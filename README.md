@@ -5,10 +5,10 @@ Type in Esperanto using the *x method*
 
 # Uzado/usage:
 Metu la programeton en via PATH, igu ĝin rulebla. `$ iksilo start` por ekuzi. `$ iksilo stop` por haltigi.
-Dum kiam rulas la programeto, vi povas tajpi en plej multajn programojn uzante la *x metodon* (ekz., *cx* iĝas *ĉ*).
+Dum kiam rulas la programeto, vi povas tajpi uzante la *x metodon* (ekz., *cx* iĝas *ĉ*).
 
 Put the script in your PATH, make it executable. `$ iksilo start` to start using. `$ iksilo stop` to stop using.
-While script is running, you can type into most applications using *x method* (e.g., *cx* becomes *ĉ*).
+While script is running, you can type using the *x method* (e.g., *cx* becomes *ĉ*).
 
 # Postuloj/requirements:
 - GNU/Linux: Vi bezonas **X** kaj **xdotool**. *dzen2* estas nedeviga.

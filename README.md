@@ -18,12 +18,8 @@ While script is running, you can type using the *x method* (e.g., *cx* becomes *
 - OpenBSD: You must be running **X** and must install **xdotool** and **coreutils**. *dzen2* is optional.
 
 # Kiel ĝustigi la programeton por via operaciumo/adjusting the script for your OS:
-- Ĉiuj operaciumoj: Uzu `$ xinput list` por trovi la id-numeron de via klavaro, metu la numeron ĉe la supro de la programo.
-- GNU/Linukso kun coreutils: Neniu alia ŝanĝo estas bezonata.
-- GNU/Linukso kun busybox: Forigu *stdbuf -oL*
-- OpenBSD: Ŝanĝu *stdbuf -oL* al *gstdbuf -oL*
+- Uzu `$ xinput list` por trovi la id-numeron de via klavaro, metu la numeron ĉe la supro de la programo.
+- Krom tio, vi bezonas ŝanĝi nenion. La programeto funkcias almenaŭ en GNU/Linukso kun coreutils, GNU/Linukso kun BusyBox kaj OpenBSD. (Verŝajne ĝi funkcius en iu ajn UNIX-stila operaciumo kiu uzas X-n, ĉar la programeto bezonas nur ŝelon kaj *xdotools*-n.)
 ---
-- All OSes: Run `$ xinput list` to get your keyboard id, put it at the appropriate spot near top of script.
-- GNU/Linux with coreutils: No further adjustments needed.
-- GNU/Linux with busybox: Delete *stdbuf -oL*
-- OpenBSD: Change *stdbuf -oL* to *gstdbuf -oL*
+- Run `$ xinput list` to get your keyboard id, put it at the appropriate spot near top of script.
+- Other than that, you don't need to change anything. The script works at least in GNU/Linux with coreutils, GNU/Linux with BusyBox and OpenBSD. (It probably would work in any UNIX-like OS running X, since all it needs is a shell and *xdotools*.)

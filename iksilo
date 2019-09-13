@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# iksilo v2.0
+# Bruno "GNUser" Dantas GPLv3
+
 # user variables:
 keyboard_id=9 # use 'xinput list' to find your keyboard's id. uzu 'xinput list' por trovi la id-numeron de via klavaro.
 

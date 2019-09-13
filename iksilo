@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# iksilo v2.0
+# iksilo v4.0
 # Bruno "GNUser" Dantas GPLv3
 
 # user variables:
@@ -53,10 +53,7 @@ create_pseudoicon()
 monitor_keyboard()
 {
 	memory="--"
-	# GNU/Linux coreutils: use '| stdbuf -oL awk'
-	# GNU/Linux busybox: no buffering by default, so use '| awk'
-	# OpenBSD with coreutils: use '| gstdbuf -oL awk'
-	xinput test $keyboard_id | stdbuf -oL awk '/press/ {print $3}' | while read keycode; do
+	xinput test $keyboard_id | awk '/press/ { print $3; fflush() }' | while read keycode; do
 		key=$(eval echo \$array_$keycode)
 		memory=$(echo "${memory}${key}" | grep -o '..$')
 		case $memory in

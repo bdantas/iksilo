@@ -53,7 +53,7 @@ create_pseudoicon()
 monitor_keyboard()
 {
 	memory="--"
-	xinput test $keyboard_id | awk '/press/ { print $3; fflush() }' | while read keycode; do
+	xinput test $keyboard_id | awk '/press/ {print $3; fflush()}' | while read keycode; do
 		key=$(eval echo \$array_$keycode)
 		memory=$(echo "${memory}${key}" | grep -o '..$')
 		case $memory in

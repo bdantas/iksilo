@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# iksilo v4.0
+# iksilo v4.1
 # Bruno "GNUser" Dantas GPLv3
 
 # user variables:
@@ -53,7 +53,7 @@ create_pseudoicon()
 monitor_keyboard()
 {
 	memory="--"
-	xinput test $keyboard_id | awk '/press/ {print $3; fflush()}' | while read keycode; do
+	xinput test $keyboard_id | awk '/press/ {print $3; system("")}' | while read keycode; do # system("") disables awk buffer
 		key=$(eval echo \$array_$keycode)
 		memory=$(echo "${memory}${key}" | grep -o '..$')
 		case $memory in

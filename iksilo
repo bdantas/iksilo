@@ -1,42 +1,92 @@
 #!/bin/sh
 
+# user variables:
 keyboard_id=9 # use 'xinput list' to find your keyboard's id. uzu 'xinput list' por trovi la id-numeron de via klavaro.
 
-# 0. be ready to die gracefully 
+# internal variables:
+saved_options=/tmp/xkbmap-saved
 dzen2_pid_file=/tmp/iksilo-dzen2-pid
-die() { setxkbmap -option; kill $(cat $dzen2_pid_file); pkill -KILL -f iksilo; }
-trap die INT HUP TERM; [ "$1" = "stop" ] && die
 
-# 1. add the necessary keyboard options 
-setxkbmap -option lv3:ralt_switch,esperanto:qwerty
+main()
+{
+	save_keyboard_options
+	add_keyboard_options
+	build_array
+	create_pseudoicon
+	monitor_keyboard
+}
 
-# 2. simulate an associative array using variables: array_38=a array_39=s array_40=d etc.
-xmodmap -pke >/tmp/keymap
-while read line; do
-	keycode="$(echo $line | cut -d' ' -f 2)"
-	key="$(echo $line | cut -d' ' -f 4)"
-	eval array_"$keycode"="$key"
-done </tmp/keymap
-rm /tmp/keymap
+save_keyboard_options()
+{
+	setxkbmap -query >$saved_options
+	# strange: 'query' outputs colons and spaces, but 'config' will want equals and quotes
+	sed -i -e 's/: */="/' -e 's/$/"/' $saved_options
+}
 
-# 3. create indicator if dzen2 is installed
-if which dzen2 >/dev/null; then
-	echo "IKSO" | dzen2 -fg "white" -bg "green" -w 40 -h 20 -x 1235 -y 755 -p -e '' & echo $! >$dzen2_pid_file
-fi
+add_keyboard_options()
+{ 
+	setxkbmap -option lv3:ralt_switch,esperanto:qwerty
+}
 
-# 4. keep track of last two keypresses, replacing them with Esperanto character when appropriate
-replace() { xdotool key BackSpace BackSpace "$1"; }
-memory="--"
+build_array() # actually just a series of variables (e.g., array_38=a array_39=s array_40=d etc.)
+{
+	xmodmap -pke >/tmp/keymap
+	while read line; do
+		keycode="$(echo $line | cut -d' ' -f 2)"
+		key="$(echo $line | cut -d' ' -f 4)"
+		eval array_"$keycode"="$key"
+	done </tmp/keymap
+	rm /tmp/keymap
+}
 
-xinput test $keyboard_id | stdbuf -oL awk '/press/ {print $3}' | while read keycode; do
-	key=$(eval echo \$array_$keycode)
-	memory=$(echo "${memory}${key}" | grep -o '..$')
-	case $memory in
-		cx) replace ISO_Level3_Shift+c ;;
-		gx) replace ISO_Level3_Shift+g ;;
-		hx) replace ISO_Level3_Shift+h ;;
-		jx) replace ISO_Level3_Shift+j ;;
-		sx) replace ISO_Level3_Shift+s ;;
-		ux) replace ISO_Level3_Shift+u ;;
-	esac
-done
+create_pseudoicon()
+{
+	if which dzen2 >/dev/null; then
+		echo "IKSO" | dzen2 -fg "white" -bg "green" -w 40 -h 20 -x 1235 -y 755 -p -e '' & 
+		echo $! >$dzen2_pid_file
+	fi
+}
+
+monitor_keyboard()
+{
+	memory="--"
+	# GNU/Linux coreutils: use '| stdbuf -oL awk'
+	# GNU/Linux busybox: no buffering by default, so use '| awk'
+	# OpenBSD with coreutils: use '| gstdbuf -oL awk'
+	xinput test $keyboard_id | stdbuf -oL awk '/press/ {print $3}' | while read keycode; do
+		key=$(eval echo \$array_$keycode)
+		memory=$(echo "${memory}${key}" | grep -o '..$')
+		case $memory in
+			cx) replace ISO_Level3_Shift+c ;;
+			gx) replace ISO_Level3_Shift+g ;;
+			hx) replace ISO_Level3_Shift+h ;;
+			jx) replace ISO_Level3_Shift+j ;;
+			sx) replace ISO_Level3_Shift+s ;;
+			ux) replace ISO_Level3_Shift+u ;;
+		esac
+	done
+}
+
+replace()
+{
+	xdotool key BackSpace BackSpace "$1"
+}
+
+restore_keyboard_options()
+{
+	# first clear all options, then restore original options
+	setxkbmap -option
+	setxkbmap -config $saved_options
+}
+
+die_gracefully()
+{ 
+	restore_keyboard_options
+	kill $(cat $dzen2_pid_file)
+	pkill -KILL -f iksilo
+}
+trap die_gracefully INT HUP TERM
+
+[ "$1" = "start" ] && main
+[ "$1" = "stop" ] && die_gracefully
+

@@ -4,9 +4,9 @@ Tajpu Esperante per x-sistemo
 ehxosxangxocxiujxauxde → eĥoŝanĝoĉiuĵaŭde
 
 # Postuloj:
-- **UNIX-stila operaciumo** (GNU/Linukso aŭ BSD) rulante **X** fenestrokrean sistemon
-- **xdotool**, **xinput** kaj **setxkbmap** (devige) (en Debian kaj ties idoj, *setxkbmap* estas parto de x11-xkb-utils) 
-- *dzen2* (nedevige)
+- UNIX-stila operaciumo (GNU/Linukso aŭ BSD) rulante X fenestrokrean sistemon
+- *xdotool*, *xinput* kaj *setxkbmap* (devigaj) (en Debian kaj ties idoj, *setxkbmap* estas parto de x11-xkb-utils) 
+- *dzen2* (nedeviga)
 
 # Uzado:
 `iksilo start` por eki kaj `iksilo stop` por halti

@@ -61,7 +61,7 @@ build_array() # actually just a series of variables (e.g., array_38=a array_39=s
 create_pseudoicon()
 {
 	if which dzen2 >/dev/null; then
-		echo "IKSO" | dzen2 -fg "white" -bg "green" -w 40 -h 20 -x 1235 -y 755 -p -e '' & 
+		echo "IKSO" | dzen2 -fg "white" -bg "green" -w 40 -h 20 -x 10 -y 10 -p -e '' & 
 		echo $! >$dzen2_pid_file
 	fi
 }

@@ -4,7 +4,7 @@
 # Bruno "GNUser" Dantas GPLv3
 
 # user variable:
-keyboard_id=auto # au forigu 'auto' kaj metu id-numeron trovita per 'xinput --list'
+keyboard_id=auto # au forigu 'auto' kaj metu id-numeron de via klavaro lau 'xinput --list'
 
 # internal variables:
 lockfile=/tmp/lock.iksilo

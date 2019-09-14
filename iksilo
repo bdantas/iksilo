@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# iksilo v5.1
+# iksilo v5.2
 # Bruno "GNUser" Dantas GPLv3
 
 # user variable:
@@ -31,7 +31,7 @@ create_lockfile()
 find_keyboard_id()
 {
 	if [ "$keyboard_id" = "auto" ]; then
-		keyboard_id=$(LANG=C xinput --list | grep -i keyboard | egrep -iv 'virtual|video|button|bus' | egrep -o 'id=[0-9]+' | egrep -o '[0-9]+')
+		keyboard_id=$(xinput list --id-only | xargs -n 1 -I+ sh -c "xinput list + | grep -wv + | grep XIKeyClass" | egrep -o '[0-9]+')
 	fi
 }
 

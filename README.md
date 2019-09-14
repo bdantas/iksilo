@@ -11,5 +11,6 @@ ehxosxangxocxiujxauxde → eĥoŝanĝoĉiuĵaŭde
 # Uzado:
 `iksilo start` por eki kaj `iksilo stop` por halti
 
-# Averto:
-Se ĝi ne funkcias por vi, unue provu forigi *auto* de la supro de la programeto kaj metu tien la id-numeron de via klavaro (trovu la id-numeron per *xinput --list*)
+# Ne funkcias?
+1. Uzu *xinput --list* por trovi la id-numeron de via klavaro
+2. Forigu *auto* de la supro de la programeto, metu tien la id-numeron

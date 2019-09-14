@@ -5,4 +5,7 @@ Tajpu Esperante per la x-sistemo.
 `iksilo start` por ekuzi kaj `iksilo stop` por halti.
 
 # Postuloj:
-GNU/Linukso aŭ BSD, X (norma fenestra sistemo). Instalu *xdotool*. Mi rekomendas instali ankaŭ *dzen2* (nedeviga).
+- **UNIX-stila operaciumo** (ekz., GNU/Linukso aŭ BSD)
+- **X** (norma fenestra sistemo)
+- **xdotool**
+- *dzen2* (nedeviga)

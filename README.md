@@ -1,5 +1,5 @@
 # iksilo
-Tajpu Esperante per la x-sistemo
+Tajpu Esperante per x-sistemo
 
 # Postuloj:
 - UNIX-stila operaciumo (GNU/Linukso aŭ BSD) rulante X fenestrokrean sistemon

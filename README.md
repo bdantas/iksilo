@@ -5,8 +5,8 @@ ehxosxangxocxiujxauxde → eĥoŝanĝoĉiuĵaŭde
 
 # Postuloj:
 - UNIX-stila operaciumo (GNU/Linukso aŭ BSD) rulante X fenestrokrean sistemon
-- Instalu *xdotool* kaj *xinput* (devige)
-- Instalu *dzen2* (nedevige)
+- *xdotool*, *xinput* kaj *setxkbmap* (devige) (en Debianidoj *setxkbmap* estas parto de x11-xkb-utils) 
+- *dzen2* (nedevige)
 
 # Uzado:
 `iksilo start` por eki kaj `iksilo stop` por halti

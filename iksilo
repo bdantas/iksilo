@@ -1,22 +1,38 @@
 #!/bin/sh
 
-# iksilo v4.1
+# iksilo v5.0
 # Bruno "GNUser" Dantas GPLv3
 
-# user variables:
-keyboard_id=9 # use 'xinput list' to find your keyboard's id. uzu 'xinput list' por trovi la id-numeron de via klavaro.
+# user variable:
+keyboard_id=auto # au forigu 'auto' kaj metu id-numeron trovita per 'xinput --list'
 
 # internal variables:
+lockfile=/tmp/lock.iksilo
 saved_options=/tmp/xkbmap-saved
 dzen2_pid_file=/tmp/iksilo-dzen2-pid
 
 main()
 {
+	create_lockfile
+	find_keyboard_id
 	save_keyboard_options
 	add_keyboard_options
 	build_array
 	create_pseudoicon
 	monitor_keyboard
+}
+
+create_lockfile()
+{
+	 # ensure only one instance of this script is running at a time
+	(umask 222; echo $$ >$lockfile) || { echo "iksilo is already running, exiting now."; exit; }
+}
+
+find_keyboard_id()
+{
+	if [ "$keyboard_id" = "auto" ]; then
+		keyboard_id=$(xinput --list --long | grep XIKeyClass | head -n 1 | egrep -o '[0-9]+')
+	fi
 }
 
 save_keyboard_options()
@@ -83,10 +99,10 @@ die_gracefully()
 { 
 	restore_keyboard_options
 	kill $(cat $dzen2_pid_file)
+	rm -f $lockfile
 	pkill -KILL -f iksilo
 }
 trap die_gracefully INT HUP TERM
 
 [ "$1" = "start" ] && main
 [ "$1" = "stop" ] && die_gracefully
-

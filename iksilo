@@ -30,7 +30,7 @@ create_lockfile()
 
 find_keyboard_id()
 {
-	if [ "$keyboard_id" = "auto" ]; then
+	if [ "$keyboard_id" = "auto" ]; then # thank you ralph.ronnquist (GNU/Linux wizard from Devuan-land)!
 		keyboard_id=$(xinput list --id-only | xargs -n 1 -I+ sh -c "xinput list + | grep -wv + | grep XIKeyClass" | egrep -o '[0-9]+')
 	fi
 }

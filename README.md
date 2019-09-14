@@ -2,7 +2,7 @@
 Tajpu Esperante per la x-sistemo
 
 # Postuloj:
-- UNIX-stila operaciumo (GNU/Linukso aŭ BSD) rulante X (norma fenestra sistemo)
+- UNIX-stila operaciumo (GNU/Linukso aŭ BSD) rulante X fenestrokrean sistemon
 - Instalu *xdotool* (devige)
 - Instalu *dzen2* (nedevige)
 

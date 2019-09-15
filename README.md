@@ -1,7 +1,7 @@
 # iksilo
 Tajpu Esperante per x-sistemo
 
-ehxosxangxocxiujxauxde → eĥoŝanĝoĉiuĵaŭde
+ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 
 # Postuloj:
 - UNIX-stila operaciumo (GNU/Linukso aŭ BSD) rulante X fenestrokrean sistemon

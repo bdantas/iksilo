@@ -30,7 +30,7 @@ create_lockfile()
 
 find_keyboard_id()
 {
-	if [ "$keyboard_id" = "auto" ]; then # special thanks to ralph.ronnquist (Devuan) and Rich (Tiny Core)
+	if [ "$keyboard_id" = "auto" ]; then # special thanks to ralph.ronnquist from Devuan
 		master_id=$(LANG=C xinput list | grep -i 'master keyboard' | egrep -o 'id=[0-9]+' | egrep -o '[0-9]+')
 		keyboard_id=$(LANG=C xinput list $master_id | grep 'XIKeyClass' | egrep -o '[0-9]+')
 	fi

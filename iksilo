@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# iksilo v5.3
+# iksilo v6.0
 # Bruno "GNUser" Dantas GPLv3
 
 # user variable:
@@ -70,7 +70,7 @@ create_pseudoicon()
 monitor_keyboard()
 {
 	memory="--"
-	xinput test $keyboard_id | awk '/press/ {print $3; system("")}' | while read keycode; do # system("") disables awk buffer
+	xinput --test-xi2 --root $keyboard_id | awk -F': ' '/detail/ { current_keycode = $2; if (current_keycode != prior_keycode) print current_keycode; prior_keycode = current_keycode; system("") }' | while read keycode; do # system("") disables awk buffer
 		key=$(eval echo \$array_$keycode)
 		memory=$(echo "${memory}${key}" | grep -o '..$')
 		case $memory in
@@ -100,6 +100,7 @@ die_gracefully()
 { 
 	restore_keyboard_options
 	kill $(cat $dzen2_pid_file)
+	pkill xinput
 	rm -f $lockfile
 	pkill -KILL -f iksilo
 }

@@ -10,7 +10,3 @@ ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 
 # Uzado:
 `iksilo start` por eki kaj `iksilo stop` por halti
-
-# Ne funkcias?
-1. Uzu *xinput --list* por trovi la id-numeron de via klavaro
-2. Forigu *auto* de la supro de la programeto, metu tien la id-numeron

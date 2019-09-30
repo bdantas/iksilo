@@ -8,8 +8,7 @@ ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 - Devigaj: *xdotool*, *xinput*, *setxkbmap*, *xmodmap*
 - Nedeviga: *dzen2*
 
-Por akiri ĉiujn postulojn en Debian aŭ ties idoj (ekz. Ubuntu), faru ĉi tion:
-sudo apt install xdotool xinput x11
+Notu: En kelkaj operaciumoj (ekz. Debian kaj ties idoj) setxkbmap estas parto de x11-xkb-utils kaj xmodmap estas parto de x11-xserver-utils
 
 # Uzado:
 `iksilo start` por eki kaj `iksilo stop` por halti

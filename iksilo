@@ -1,20 +1,11 @@
 #!/bin/sh
 
-# iksilo v6.1
+# iksilo v7.0
 # Bruno "GNUser" Dantas GPLv3
-
-# user variable:
-keyboard_id=auto # au forigu 'auto' kaj metu id-numeron de via klavaro lau 'xinput --list'
-
-# internal variables:
-lockfile=/tmp/lock.iksilo
-saved_options=/tmp/xkbmap-saved
-dzen2_pid_file=/tmp/iksilo-dzen2-pid
 
 main()
 {
 	create_lockfile
-	find_keyboard_id
 	save_keyboard_options
 	add_keyboard_options
 	build_array
@@ -28,18 +19,10 @@ create_lockfile()
 	(umask 222; echo $$ >$lockfile) || { echo "iksilo is already running, exiting now."; exit; }
 }
 
-find_keyboard_id()
-{
-	if [ "$keyboard_id" = "auto" ]; then # special thanks to ralph.ronnquist (Devuan) and Rich (Tiny Core)
-		master_id=$(LANG=C xinput list | grep -i 'master keyboard' | egrep -o 'id=[0-9]+' | egrep -o '[0-9]+')
-		keyboard_id=$(LANG=C xinput list $master_id | grep 'XIKeyClass' | egrep -o '[0-9]+')
-	fi
-}
-
 save_keyboard_options()
 {
 	setxkbmap -query >$saved_options
-	# strange: 'query' outputs colons and spaces, but 'config' will want equals and quotes
+	# strange: 'query' outputs colons and spaces, but 'config' (in restore_keyboard_options) expects equals and quotes
 	sed -i -e 's/: */="/' -e 's/$/"/' $saved_options
 }
 
@@ -54,9 +37,9 @@ build_array() # actually just a series of variables (e.g., array_38=a array_39=s
 	while read line; do
 		keycode="$(echo $line | cut -d' ' -f 2)"
 		key="$(echo $line | cut -d' ' -f 4)"
+		echo "$key" | grep -q '..' && key='+' # convert names (e.g., minus, slash, Menu) to a single character (+)
 		eval array_"$keycode"="$key"
 	done </tmp/keymap
-	rm /tmp/keymap
 }
 
 create_pseudoicon()
@@ -70,9 +53,14 @@ create_pseudoicon()
 monitor_keyboard()
 {
 	memory="--"
-	LANG=C xinput --test-xi2 --root $keyboard_id | awk -F': ' '/detail/ { current_keycode = $2; if (current_keycode != prior_keycode) print current_keycode; prior_keycode = current_keycode; system("") }' | while read keycode; do # system("") disables awk buffer
+	LANG=C xinput --test-xi2 --root | awk '
+/RawKeyPress/ { relevant=1 }
+relevant==1 && /detail/ { print $2; relevant=0 }
+{ fflush() }
+' | while read keycode; do
 		key=$(eval echo \$array_$keycode)
 		memory=$(echo "${memory}${key}" | grep -o '..$')
+		#echo $memory # to debug, uncomment this line and run 'iksilo start' in a terminal
 		case $memory in
 			cx) replace ISO_Level3_Shift+c ;;
 			gx) replace ISO_Level3_Shift+g ;;
@@ -105,6 +93,11 @@ die_gracefully()
 	pkill -KILL -f iksilo
 }
 trap die_gracefully INT HUP TERM
+
+# internal variables:
+lockfile=/tmp/lock.iksilo
+saved_options=/tmp/xkbmap-saved
+dzen2_pid_file=/tmp/iksilo-dzen2-pid
 
 [ "$1" = "start" ] && main
 [ "$1" = "stop" ] && die_gracefully

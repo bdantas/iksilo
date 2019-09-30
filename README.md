@@ -12,7 +12,7 @@ ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 ```
 $ sudo apt install xdotool xinput x11-xkb-utils x11-xserver-utils dzen2 # vidu la suban noton
 $ cd /tmp
-$ wget https://github.com/bdantas/iksilo/blob/master/iksilo
+$ wget https://github.com/bdantas/iksilo/archive/master.zip
 $ unzip master.zip
 $ sudo cp ./iksilo-master/iksilo /usr/local/bin/iksilo
 $ sudo chmod a+x /usr/local/bin/iksilo

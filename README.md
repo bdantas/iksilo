@@ -10,7 +10,7 @@ ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 
 # Instalado:
 ```
-$ sudo apt install xdotool xinput x11-xkb-utils x11-xserver-utils dzen2 # vidu la suban noton
+$ sudo apt install xdotool xinput x11-xkb-utils x11-xserver-utils dzen2
 $ cd /tmp
 $ wget https://github.com/bdantas/iksilo/archive/master.zip
 $ unzip master.zip

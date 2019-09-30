@@ -17,7 +17,7 @@ $ unzip master.zip
 $ sudo cp ./iksilo-master/iksilo /usr/local/bin/iksilo
 $ sudo chmod a+x /usr/local/bin/iksilo
 ```
-Noto: Se via operaciumo ne estas Debian-stila, ĝustigu la unuan paŝon
+Notu: Se via operaciumo ne estas Debian-stila, ĝustigu la unuan paŝon
 
 # Uzado:
 `$ iksilo start` por eki kaj `$ iksilo stop` por halti

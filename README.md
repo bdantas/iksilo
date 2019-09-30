@@ -10,14 +10,14 @@ ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 
 # Instalado:
 ```
-$ sudo apt install xdotool xinput x11-xkb-utils x11-xserver-utils dzen2
+$ sudo apt install xdotool xinput x11-xkb-utils x11-xserver-utils dzen2 # vidu la suban noton
 $ cd /tmp
 $ wget https://github.com/bdantas/iksilo/blob/master/iksilo
 $ unzip master.zip
 $ sudo cp ./iksilo-master/iksilo /usr/local/bin/iksilo
 $ sudo chmod a+x /usr/local/bin/iksilo
 ```
-Notu: La unua paŝo ĉi-supre estas por Debian, Ubuntu kaj aliaj Debian-idoj; se via operaciumo estas iu alia, ŝanĝetu la unuan paŝon
+Noto: Se via operaciumo ne estas Debian-stila, ĝustigu la *sudo apt install* paŝon
 
 # Uzado:
 `$ iksilo start` por eki kaj `$ iksilo stop` por halti

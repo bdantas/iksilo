@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# iksilo v7.0
+# iksilo v7.1
 # Bruno "GNUser" Dantas GPLv3
 
 main()
@@ -37,7 +37,6 @@ build_array() # actually just a series of variables (e.g., array_38=a array_39=s
 	while read line; do
 		keycode="$(echo $line | cut -d' ' -f 2)"
 		key="$(echo $line | cut -d' ' -f 4)"
-		echo "$key" | grep -q '..' && key='+' # convert names (e.g., minus, slash, Menu) to a single character (+)
 		eval array_"$keycode"="$key"
 	done </tmp/keymap
 }
@@ -52,14 +51,14 @@ create_pseudoicon()
 
 monitor_keyboard()
 {
-	memory="--"
+	prior_key=''
 	LANG=C xinput --test-xi2 --root | awk '
 /RawKeyPress/ { relevant=1 }
 relevant==1 && /detail/ { print $2; relevant=0 }
 { fflush() }
 ' | while read keycode; do
 		key=$(eval echo \$array_$keycode)
-		memory=$(echo "${memory}${key}" | grep -o '..$')
+		memory="$prior_key$key"
 		#echo $memory # to debug, uncomment this line and run 'iksilo start' in a terminal
 		case $memory in
 			cx) replace ISO_Level3_Shift+c ;;
@@ -69,6 +68,7 @@ relevant==1 && /detail/ { print $2; relevant=0 }
 			sx) replace ISO_Level3_Shift+s ;;
 			ux) replace ISO_Level3_Shift+u ;;
 		esac
+		prior_key="$key"
 	done
 }
 

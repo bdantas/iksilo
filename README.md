@@ -15,7 +15,7 @@ $ cd /tmp
 $ wget https://github.com/bdantas/iksilo/archive/master.zip
 $ unzip master.zip
 $ sudo cp ./iksilo-master/iksilo /usr/local/bin/iksilo
-$ sudo mkdir -p /usr/share/icons; sudo cp ./iksilo-master/iksilo.png /usr/share/icons/iksilo.png
+$ sudo cp ./iksilo-master/iksilo.png /usr/share/icons/iksilo.png
 $ sudo chmod a+x /usr/local/bin/iksilo
 ```
 Notu: Se via operaciumo ne estas Debian-stila, ĝustigu la unuan paŝon

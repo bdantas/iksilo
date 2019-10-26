@@ -51,7 +51,7 @@ icon_add()
 
 icon_remove()
 {
-	pgrep -f "yad.*$1" >/dev/null 2>&1 || return
+	pgrep -f "yad.*$1" >/dev/null 2>&1
 }
 
 monitor_keyboard()

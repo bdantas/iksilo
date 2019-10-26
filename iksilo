@@ -99,5 +99,5 @@ lockfile=/tmp/lock.iksilo
 saved_options=/tmp/xkbmap-saved
 dzen2_pid_file=/tmp/iksilo-dzen2-pid
 
-[ "$1" = "start" ] && main
+[ "$1" = "start" ] && main &
 [ "$1" = "stop" ] && die_gracefully

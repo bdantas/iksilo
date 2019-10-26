@@ -1,7 +1,10 @@
 #!/bin/sh
 
-# iksilo v7.1
+# iksilo v7.0
 # Bruno "GNUser" Dantas GPLv3
+
+# user variables:
+icon=/usr/share/icons/iksilo.png
 
 main()
 {
@@ -9,7 +12,7 @@ main()
 	save_keyboard_options
 	add_keyboard_options
 	build_array
-	create_pseudoicon
+	which yad >/dev/null && icon_add "$icon" "$tooltip"
 	monitor_keyboard
 }
 
@@ -31,22 +34,24 @@ add_keyboard_options()
 	setxkbmap -option lv3:ralt_switch,esperanto:qwerty
 }
 
-build_array() # actually just a series of variables (e.g., array_38=a array_39=s array_40=d etc.)
+build_array() # actually just a series of variables (e.g., map_38=a map_39=s map_40=d etc.)
 {
 	xmodmap -pke >/tmp/keymap
 	while read line; do
 		keycode="$(echo $line | cut -d' ' -f 2)"
 		key="$(echo $line | cut -d' ' -f 4)"
-		eval array_"$keycode"="$key"
+		eval map_"$keycode"="$key"
 	done </tmp/keymap
 }
 
-create_pseudoicon()
+icon_add()
 {
-	if which dzen2 >/dev/null; then
-		echo "IKSO" | dzen2 -fg "white" -bg "green" -w 40 -h 20 -x 10 -y 10 -p -e '' & 
-		echo $! >$dzen2_pid_file
-	fi
+	yad --notification --image="$1" --icon-size=24 --text="$2" --command=true &
+}
+
+icon_remove()
+{
+	pgrep -f "yad.*$1" >/dev/null 2>&1 || return
 }
 
 monitor_keyboard()
@@ -57,7 +62,7 @@ monitor_keyboard()
 relevant==1 && /detail/ { print $2; relevant=0 }
 { fflush() }
 ' | while read keycode; do
-		key=$(eval echo \$array_$keycode)
+		key=$(eval echo \$map_$keycode)
 		memory="$prior_key$key"
 		#echo $memory # to debug, uncomment this line and run 'iksilo start' in a terminal
 		case $memory in
@@ -87,7 +92,7 @@ restore_keyboard_options()
 die_gracefully()
 { 
 	restore_keyboard_options
-	kill $(cat $dzen2_pid_file)
+	icon_remove "$icon"
 	pkill xinput
 	rm -f $lockfile
 	pkill -KILL -f iksilo
@@ -96,8 +101,8 @@ trap die_gracefully INT HUP TERM
 
 # internal variables:
 lockfile=/tmp/lock.iksilo
+tooltip=iksilo
 saved_options=/tmp/xkbmap-saved
-dzen2_pid_file=/tmp/iksilo-dzen2-pid
 
 [ "$1" = "start" ] && main &
 [ "$1" = "stop" ] && die_gracefully

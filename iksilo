@@ -12,7 +12,7 @@ main()
 	save_keyboard_options
 	add_keyboard_options
 	build_array
-	which yad >/dev/null && icon_add "$icon" "$tooltip"
+	icon_add "$icon" "$tooltip"
 	monitor_keyboard
 }
 
@@ -46,6 +46,7 @@ build_array() # actually just a series of variables (e.g., map_38=a map_39=s map
 
 icon_add()
 {
+	which yad >/dev/null || return
 	yad --notification --image="$1" --icon-size=24 --text="$2" --command=true &
 }
 

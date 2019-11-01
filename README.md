@@ -8,7 +8,7 @@ ehxosxangxocxiujxauxde -> eĥoŝanĝoĉiuĵaŭde
 - Devigaj: **xdotool**, **xinput**, **setxkbmap***, **xmodmap****
 - Nedeviga: *yad*
 
-\* Kutime havebla per pakaĵo *x11-xkb-utils*
+\* Kutime havebla per pakaĵo *x11-xkb-utils*  
 ** Kutime havebla per pakaĵo *x11-xserver-utils*
 
 # Instalado

@@ -18,9 +18,10 @@ $ cd /tmp
 $ wget https://github.com/bdantas/iksilo/archive/master.zip
 $ unzip master.zip
 $ cd iksilo-master
-$ sudo cp iksilo /usr/local/bin
+$ sudo cp iksilo /usr/local/bin/
 $ sudo chmod a+x /usr/local/bin/iksilo
-$ sudo cp iksilo.png /usr/share/icons
+$ sudo mkdir -p /usr/share/icons
+$ sudo cp iksilo.png /usr/share/icons/
 ```
 Notu: Se via operaciumo ne estas Debian-stila, ĝustigu la unuan paŝon
 
